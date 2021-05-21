@@ -1,3 +1,4 @@
+import requests
 import json
 import urllib3
 import csv
@@ -20,8 +21,11 @@ for id in list(range(args.start, args.end)):
     print(id)
     url = 'https://www.myagedcare.gov.au/api/v1/find-a-provider/details/chsp/%d' % (id)
 
-    r = http.request('GET', url)
-    response = json.loads(r.data)
+    # r = http.request('GET', url)
+    # response = json.loads(r.data)
+    r = requests.get(url)
+    response = json.loads(r.content)
+    
     if('nid' in response):
         data = {
             "ID": response['nid'],
